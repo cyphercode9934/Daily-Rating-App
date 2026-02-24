@@ -25,10 +25,6 @@ app.post("/update-rating", async (req, res) => {
     const sheets = google.sheets({ version: "v4", auth: client });
 
     const spreadsheetId = "1eJ_J5jCAizy3ck4gn9ssuIFSmrN7sLsFlT4_zPOBEaA";
-
-    if (!row) {
-      return res.status(400).json({ error: "Invalid month provided" });
-    }
     
     console.log("Parsed GOOGLE_CREDENTIALS:", !!process.env.GOOGLE_CREDENTIALS);
 
@@ -56,6 +52,10 @@ app.post("/update-rating", async (req, res) => {
     const row = monthMap[month];
     const column = getColumnLetter(day);
     const range = `Sheet1!${column}${row}`;
+
+    if (!row) {
+      return res.status(400).json({ error: "Invalid month provided" });
+    }
 
     console.log(`Updating cell: ${range} with value ${rating}`);
     console.log("Month:", month);
