@@ -16,6 +16,8 @@ const auth = new google.auth.GoogleAuth({
 });
 
 app.post("/update-rating", async (req, res) => {
+  console.log("Route hit!");
+  console.log("Request body:", req.body);
   try {
     const { month, day, rating } = req.body;
 
