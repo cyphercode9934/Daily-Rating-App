@@ -29,6 +29,8 @@ app.post("/update-rating", async (req, res) => {
     if (!row) {
       return res.status(400).json({ error: "Invalid month provided" });
     }
+    
+    console.log("Parsed GOOGLE_CREDENTIALS:", !!process.env.GOOGLE_CREDENTIALS);
 
     // Example range (you will adjust this later)
     const monthMap = {
@@ -73,8 +75,8 @@ app.post("/update-rating", async (req, res) => {
 
     res.json({ success: true });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to update rating" });
+    console.error("Failed to update rating:", error);
+    res.status(500).json({ error: error.message || error.toString() });
   }
 });
 
