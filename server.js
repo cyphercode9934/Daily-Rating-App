@@ -54,6 +54,11 @@ app.post("/update-rating", async (req, res) => {
     const range = `Sheet1!${column}${row}`;
 
     console.log(`Updating cell: ${range} with value ${rating}`);
+    console.log("Month:", month);
+    console.log("Day:", day);
+    console.log("Row:", row);
+    console.log("Column:", column);
+    console.log("Range:", range);
 
     await sheets.spreadsheets.values.update({
       spreadsheetId,
